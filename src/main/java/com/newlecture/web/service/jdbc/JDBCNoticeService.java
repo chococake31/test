@@ -1,7 +1,6 @@
 package com.newlecture.web.service.jdbc;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,9 +11,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.newlecture.web.entity.Notice;
 import com.newlecture.web.service.NoticeService;
 
+
+@Component	// 클래스를 객체화해서 컨테이너에 담은 것임 but 이걸 찾으려면 패키지를 찾을 수 있도록 설정해야 한다. => scan 
 public class JDBCNoticeService implements NoticeService {
 	
 //	private String url = "jdbc:mysql://localhost:3306/mybatis_db";
@@ -22,11 +26,12 @@ public class JDBCNoticeService implements NoticeService {
 //	private String pwd = "1234";
 //	private String driver = "com.mysql.cj.jdbc.Driver";
 	
+	@Autowired
 	private DataSource dataSource;
 	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+//	public void setDataSource(DataSource dataSource) {
+//		this.dataSource = dataSource;
+//	}
 
 	public List<Notice> getList(int page, String field, String query) throws ClassNotFoundException, SQLException{
 		
